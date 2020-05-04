@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib",
+        "rootDir": "./src",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "target": "es5",
+        "allowJs": false,
+        "experimentalDecorators": true,
+        "lib": ["dom", "es5", "scripthost", "esnext"],
+        "types": [
+            "jest",
+            "node"
+        ]
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
