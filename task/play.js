@@ -1,6 +1,6 @@
-const { generateTypesFromSource } = require("../lib/generate");
+const { generateFromSource } = require("../lib/generate.types");
 
-const out = generateTypesFromSource(`
+const r = generateFromSource(`
     enum BlogStatus {
         ACTIVE
         INACTIVE
@@ -37,4 +37,4 @@ const out = generateTypesFromSource(`
 `);
 
 console.log("-- Output");
-console.log(out);
+console.log(r.content);
