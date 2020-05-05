@@ -110,11 +110,6 @@ export const DefaultGenerators: IGenerators = {
     }
 }
 
-export const DefaultOptions: IGenerateOptions = {
-    moduleName: "types.ts",
-    generators: DefaultGenerators
-}
-
 const generateType = (type: GraphQLNamedType | GraphQLOutputType, ctx: IGenerateContext): string => {
     if(type instanceof GraphQLInterfaceType) {
         return ctx.generators.interface(type, ctx);
@@ -138,9 +133,14 @@ export interface IGenerateResult {
     content: string;
 }
 
+export const DefaultOptions: IGenerateOptions = {
+    moduleName: "types",
+    generators: DefaultGenerators
+};
+
 export const generateTypes = (schema: GraphQLSchema, opts?: IGenerateOptions): IGenerateResult => {
     opts = {
-        moduleName: opts?.moduleName,
+        ...DefaultOptions,
         generators: {
             ...DefaultOptions.generators,
             ...opts?.generators
@@ -166,6 +166,6 @@ export const generateTypes = (schema: GraphQLSchema, opts?: IGenerateOptions): I
     };
 };
 
-export const generateFromSource = (source: string, opts?: IGenerateOptions): IGenerateResult => {
+export const generateTypesFromSource = (source: string, opts?: IGenerateOptions): IGenerateResult => {
     return generateTypes(buildSchema(source, { assumeValidSDL: true }), opts);
 };

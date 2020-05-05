@@ -1,15 +1,33 @@
-import { IGenerateResult, generateFromSource as generateTypesFromSource } from "./generate.types";
+import { IGenerateResult, IGenerateOptions as ITypeGenerateOptions, generateTypesFromSource, IGenerators } from "./generate.types";
+import { GraphQLObjectType, GraphQLSchema, buildSchema } from "graphql";
 
-export interface IGenerateOptions {
-    moduleName?: string;
+export interface IGenerateModelTypeOptions {
+    typesModuleName?: string;
 }
 
-export interface IGenerateContext extends IGenerateOptions {
+export const generateModelInterface = (type: GraphQLObjectType): IGenerateResult => {
+    return null;
+};
 
-}
+export const generateModelImpl = (type: GraphQLObjectType): IGenerateResult => {
+    return null;
+};
 
-export const generateFromSource = (source: string, opts?: IGenerateOptions): IGenerateResult[] => {
-    const typeResult = generateTypesFromSource(source);
-    const r = [typeResult];
-    return r;
+export const generateModelTypes = (schema: GraphQLSchema, opts?: IGenerateModelTypeOptions): IGenerateResult[] => {
+    const r = [];
+    const typeMap = schema.getTypeMap();
+    for(const key in typeMap) {
+        const type = typeMap[key];
+        if(type.name && type.name.startsWith("__")) {
+            continue;
+        }
+        if(type instanceof GraphQLObjectType) {
+
+        }
+    }
+    return [];
+};
+
+export const generateModelTypesFromSource = (source: string, opts?: IGenerateModelTypeOptions): IGenerateResult[] => {
+    return generateModelTypes(buildSchema(source, { assumeValidSDL: true }), opts);
 };

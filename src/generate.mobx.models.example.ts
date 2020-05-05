@@ -1,6 +1,6 @@
-const { generateFromSource } = require("../lib/generate.types");
+import { generateModelTypesFromSource } from "./generate.mobx.models";
 
-const r = generateFromSource(`
+const r = generateModelTypesFromSource(`
     enum BlogStatus {
         ACTIVE
         INACTIVE
@@ -36,5 +36,4 @@ const r = generateFromSource(`
     }
 `);
 
-console.log("-- Output");
-console.log(r.content);
+console.log(JSON.stringify(r));
